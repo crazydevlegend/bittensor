@@ -1,5 +1,60 @@
 # Changelog
 
+## 6.7.1 / 2024-02-02
+
+## What's Changed
+* Release/6.7.0 by @ifrit98 in https://github.com/opentensor/bittensor/pull/1674
+* Eighth (final) docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1678
+* Sixth docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1676
+* Seventh docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1677
+* Update README.md by @unconst in https://github.com/opentensor/bittensor/pull/1679
+* Update README.md by @unconst in https://github.com/opentensor/bittensor/pull/1680
+* black formatting by @ifrit98 in https://github.com/opentensor/bittensor/pull/1685
+* burn -> recycle for public facing code by @ifrit98 in https://github.com/opentensor/bittensor/pull/1681
+* Expands test coverage and coverts python unittest classes to pure pytest by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1686
+* wrap set weights in a ttl multiprocessing call so we don't hang past TTL by @ifrit98 in https://github.com/opentensor/bittensor/pull/1687
+
+## New Contributors
+* @gus-opentensor made their first contribution in https://github.com/opentensor/bittensor/pull/1686
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.7.0...v6.7.1
+
+
+
+## 6.7.0 / 2024-01-25
+
+## What's Changed
+* First docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1663
+* Second docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1665
+* Third docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1666
+* updated mac yaml mac yaml by @dougsillars in https://github.com/opentensor/bittensor/pull/1668
+* Fourth docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1670
+* Fifth docstrings formatting PR by @rajkaramchedu in https://github.com/opentensor/bittensor/pull/1671
+* ensure branch off from staging and rm old docs by @ifrit98 in https://github.com/opentensor/bittensor/pull/1667
+* staging black format fix by @ifrit98 in https://github.com/opentensor/bittensor/pull/1669
+* wallet history url for taostats by @ifrit98 in https://github.com/opentensor/bittensor/pull/1672
+* take bt.config as a first argument regardless if specified by @ifrit98 in https://github.com/opentensor/bittensor/pull/1664
+* Hparams update by @ifrit98 in https://github.com/opentensor/bittensor/pull/1673
+
+## New Contributors
+* @rajkaramchedu made their first contribution in https://github.com/opentensor/bittensor/pull/1663
+* @dougsillars made their first contribution in https://github.com/opentensor/bittensor/pull/1668
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.6.1...v6.7.0
+
+
+## 6.6.1 / 2024-01-17
+
+## What's Changed
+* bittensor README update by @Jackalgirl in https://github.com/opentensor/bittensor/pull/1650
+* Bugfix btcli fix args by @ifrit98 in https://github.com/opentensor/bittensor/pull/1654
+
+## New Contributors
+* @Jackalgirl made their first contribution in https://github.com/opentensor/bittensor/pull/1650
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.6.0...v6.6.1
+
+
 ## 6.6.0 / 2024-01-08
 
 ## What's Changed
