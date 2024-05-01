@@ -198,3 +198,17 @@ class RetrieveUser(bt.Synapse):
         description="A list of required fields for the hash.",
         allow_mutation=False,
     )
+
+
+class DeleteUser(bt.Synapse):
+    # Where to find the data
+    data_hash: str  # Miner storage lookup key
+
+    deleted: bool = False
+
+    required_hash_fields: typing.List[str] = pydantic.Field(
+        ["data_hash"],
+        title="Required Hash Fields",
+        description="A list of required fields for the hash.",
+        allow_mutation=False,
+    )
