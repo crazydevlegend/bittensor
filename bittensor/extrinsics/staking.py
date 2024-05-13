@@ -19,7 +19,7 @@
 import bittensor
 from rich.prompt import Confirm
 from time import sleep
-from typing import List, Dict, Union, Optional
+from typing import List, Union, Optional
 from bittensor.utils.balance import Balance
 
 
@@ -27,7 +27,7 @@ def add_stake_extrinsic(
     subtensor: "bittensor.subtensor",
     wallet: "bittensor.wallet",
     hotkey_ss58: Optional[str] = None,
-    amount: Union[Balance, float] = None,
+    amount: Optional[Union[Balance, float]] = None,
     wait_for_inclusion: bool = True,
     wait_for_finalization: bool = False,
     prompt: bool = False,
@@ -204,7 +204,7 @@ def add_stake_multiple_extrinsic(
     subtensor: "bittensor.subtensor",
     wallet: "bittensor.wallet",
     hotkey_ss58s: List[str],
-    amounts: List[Union[Balance, float]] = None,
+    amounts: Optional[List[Union[Balance, float]]] = None,
     wait_for_inclusion: bool = True,
     wait_for_finalization: bool = False,
     prompt: bool = False,

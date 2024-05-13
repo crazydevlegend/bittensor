@@ -20,7 +20,53 @@ import shtab
 import argparse
 import bittensor
 from typing import List, Optional
-from .commands import *
+from .commands import (
+    AutocompleteCommand,
+    DelegateStakeCommand,
+    DelegateUnstakeCommand,
+    GetIdentityCommand,
+    GetWalletHistoryCommand,
+    InspectCommand,
+    ListCommand,
+    ListDelegatesCommand,
+    MetagraphCommand,
+    MyDelegatesCommand,
+    NewColdkeyCommand,
+    NewHotkeyCommand,
+    NominateCommand,
+    OverviewCommand,
+    PowRegisterCommand,
+    ProposalsCommand,
+    RegenColdkeyCommand,
+    RegenColdkeypubCommand,
+    RegenHotkeyCommand,
+    RegisterCommand,
+    RegisterSubnetworkCommand,
+    RootGetWeightsCommand,
+    RootList,
+    RootRegisterCommand,
+    RootSetBoostCommand,
+    RootSetSlashCommand,
+    RootSetWeightsCommand,
+    RunFaucetCommand,
+    SenateCommand,
+    SetIdentityCommand,
+    StakeCommand,
+    StakeShow,
+    SubnetGetHyperparamsCommand,
+    SubnetHyperparamsCommand,
+    SubnetListCommand,
+    SubnetLockCostCommand,
+    SubnetSudoCommand,
+    SwapHotkeyCommand,
+    TransferCommand,
+    UnStakeCommand,
+    UpdateCommand,
+    UpdateWalletCommand,
+    VoteCommand,
+    WalletBalanceCommand,
+    WalletCreateCommand,
+)
 
 # Create a console instance for CLI display.
 console = bittensor.__console__
@@ -182,7 +228,7 @@ class cli:
         bittensor.turn_console_on()
 
         # If no config is provided, create a new one from args.
-        if config == None:
+        if config is None:
             config = cli.create_config(args)
 
         self.config = config
@@ -302,6 +348,7 @@ class cli:
         """
         # Check for print-completion argument
         if self.config.print_completion:
+            parser = cli.__create_parser__()
             shell = self.config.print_completion
             print(shtab.complete(parser, shell))
             return

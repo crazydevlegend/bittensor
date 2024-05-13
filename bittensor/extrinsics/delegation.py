@@ -16,16 +16,15 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+import logging
 import bittensor
-from ..errors import *
+from ..errors import NominationError, NotDelegateError, NotRegisteredError, StakeError
 from rich.prompt import Confirm
-from typing import List, Dict, Union, Optional
+from typing import Union, Optional
 from bittensor.utils.balance import Balance
-from .staking import __do_add_stake_single
+from bittensor.btlogging.defines import BITTENSOR_LOGGER_NAME
 
-from loguru import logger
-
-logger = logger.opt(colors=True)
+logger = logging.getLogger(BITTENSOR_LOGGER_NAME)
 
 
 def nominate_extrinsic(
@@ -98,7 +97,7 @@ def delegate_extrinsic(
     subtensor: "bittensor.subtensor",
     wallet: "bittensor.wallet",
     delegate_ss58: Optional[str] = None,
-    amount: Union[Balance, float] = None,
+    amount: Optional[Union[Balance, float]] = None,
     wait_for_inclusion: bool = True,
     wait_for_finalization: bool = False,
     prompt: bool = False,
@@ -233,7 +232,7 @@ def undelegate_extrinsic(
     subtensor: "bittensor.subtensor",
     wallet: "bittensor.wallet",
     delegate_ss58: Optional[str] = None,
-    amount: Union[Balance, float] = None,
+    amount: Optional[Union[Balance, float]] = None,
     wait_for_inclusion: bool = True,
     wait_for_finalization: bool = False,
     prompt: bool = False,

@@ -19,17 +19,16 @@
 import bittensor
 
 import torch
+import logging
 from rich.prompt import Confirm
-from typing import Union
+from typing import Union, Tuple
 import bittensor.utils.weight_utils as weight_utils
-import multiprocessing
+from bittensor.btlogging.defines import BITTENSOR_LOGGER_NAME
 
-from loguru import logger
-
-logger = logger.opt(colors=True)
+logger = logging.getLogger(BITTENSOR_LOGGER_NAME)
 
 
-def ttl_set_weights_extrinsic(
+def set_weights_extrinsic(
     subtensor: "bittensor.subtensor",
     wallet: "bittensor.wallet",
     netuid: int,
@@ -39,41 +38,7 @@ def ttl_set_weights_extrinsic(
     wait_for_inclusion: bool = False,
     wait_for_finalization: bool = False,
     prompt: bool = False,
-    ttl: int = 100,
-):
-    r"""Sets the given weights and values on chain for wallet hotkey account."""
-    args = (
-        subtensor.chain_endpoint,
-        wallet,
-        netuid,
-        uids,
-        weights,
-        version_key,
-        wait_for_inclusion,
-        wait_for_finalization,
-        prompt,
-    )
-    process = multiprocessing.Process(target=set_weights_extrinsic, args=args)
-    process.start()
-    process.join(timeout=ttl)
-    if process.is_alive():
-        process.terminate()
-        process.join()
-        return False
-    return True
-
-
-def set_weights_extrinsic(
-    subtensor_endpoint: str,
-    wallet: "bittensor.wallet",
-    netuid: int,
-    uids: Union[torch.LongTensor, list],
-    weights: Union[torch.FloatTensor, list],
-    version_key: int = 0,
-    wait_for_inclusion: bool = False,
-    wait_for_finalization: bool = False,
-    prompt: bool = False,
-) -> bool:
+) -> Tuple[bool, str]:
     r"""Sets the given weights and values on chain for wallet hotkey account.
 
     Args:
@@ -99,7 +64,6 @@ def set_weights_extrinsic(
         success (bool):
             Flag is ``true`` if extrinsic was finalized or uncluded in the block. If we did not wait for finalization / inclusion, the response is ``true``.
     """
-    subtensor = bittensor.subtensor(subtensor_endpoint)
 
     # First convert types.
     if isinstance(uids, list):
@@ -119,7 +83,7 @@ def set_weights_extrinsic(
                 [float(v / 65535) for v in weight_vals], weight_uids
             )
         ):
-            return False
+            return False, "Prompt refused."
 
     with bittensor.__console__.status(
         ":satellite: Setting weights on [white]{}[/white] ...".format(subtensor.network)
@@ -136,7 +100,7 @@ def set_weights_extrinsic(
             )
 
             if not wait_for_finalization and not wait_for_inclusion:
-                return True
+                return True, "Not waiting for finalization or inclusion."
 
             if success == True:
                 bittensor.__console__.print(
@@ -146,7 +110,7 @@ def set_weights_extrinsic(
                     prefix="Set weights",
                     sufix="<green>Finalized: </green>" + str(success),
                 )
-                return True
+                return True, "Successfully set weights and Finalized."
             else:
                 bittensor.__console__.print(
                     ":cross_mark: [red]Failed[/red]: error:{}".format(error_message)
@@ -155,7 +119,7 @@ def set_weights_extrinsic(
                     prefix="Set weights",
                     sufix="<red>Failed: </red>" + str(error_message),
                 )
-                return False
+                return False, error_message
 
         except Exception as e:
             # TODO( devs ): lets remove all of the bittensor.__console__ calls and replace with loguru.
@@ -165,4 +129,4 @@ def set_weights_extrinsic(
             bittensor.logging.warning(
                 prefix="Set weights", sufix="<red>Failed: </red>" + str(e)
             )
-            return False
+            return False, str(e)

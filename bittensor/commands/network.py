@@ -15,7 +15,6 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-import time
 import argparse
 import bittensor
 from . import defaults
@@ -23,6 +22,7 @@ from rich.prompt import Prompt
 from rich.table import Table
 from typing import List, Optional, Dict
 from .utils import get_delegates_details, DelegatesDetails, check_netuid_set
+from .identity import SetIdentityCommand
 
 console = bittensor.__console__
 
@@ -76,11 +76,25 @@ class RegisterSubnetworkCommand:
     def _run(cli: "bittensor.cli", subtensor: "bittensor.subtensor"):
         r"""Register a subnetwork"""
         wallet = bittensor.wallet(config=cli.config)
+
         # Call register command.
-        subtensor.register_subnetwork(
+        success = subtensor.register_subnetwork(
             wallet=wallet,
             prompt=not cli.config.no_prompt,
         )
+        if success and not cli.config.no_prompt:
+            # Prompt for user to set identity.
+            do_set_identity = Prompt.ask(
+                f"Subnetwork registered successfully. Would you like to set your identity? [y/n]",
+                choices=["y", "n"],
+            )
+
+            if do_set_identity.lower() == "y":
+                subtensor.close()
+                config = cli.config.copy()
+                SetIdentityCommand.check_config(config)
+                cli.config = config
+                SetIdentityCommand.run(cli)
 
     @classmethod
     def check_config(cls, config: "bittensor.config"):
@@ -304,6 +318,11 @@ HYPERPARAMS = {
     "network_pow_registration_allowed": "sudo_set_network_pow_registration_allowed",
     "min_burn": "sudo_set_min_burn",
     "max_burn": "sudo_set_max_burn",
+    "adjustment_alpha": "sudo_set_adjustment_alpha",
+    "rho": "sudo_set_rho",
+    "kappa": "sudo_set_kappa",
+    "difficulty": "sudo_set_difficulty",
+    "bonds_moving_avg": "sudo_set_bonds_moving_average",
 }
 
 
@@ -491,6 +510,13 @@ class SubnetHyperparamsCommand:
         parser.add_argument(
             "--netuid", dest="netuid", type=int, required=False, default=False
         )
+        parser.add_argument(
+            "--no_prompt",
+            dest="no_prompt",
+            action="store_true",
+            help="""Set true to avoid prompting the user.""",
+            default=False,
+        )
         bittensor.subtensor.add_args(parser)
 
 
@@ -585,5 +611,12 @@ class SubnetGetHyperparamsCommand:
         parser = parser.add_parser("get", help="""View subnet hyperparameters""")
         parser.add_argument(
             "--netuid", dest="netuid", type=int, required=False, default=False
+        )
+        parser.add_argument(
+            "--no_prompt",
+            dest="no_prompt",
+            action="store_true",
+            help="""Set true to avoid prompting the user.""",
+            default=False,
         )
         bittensor.subtensor.add_args(parser)

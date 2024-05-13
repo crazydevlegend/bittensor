@@ -1,5 +1,155 @@
 # Changelog
 
+
+## 6.12.0 / 2024-04-29
+
+## What's Changed
+* Tests: Axon to_string patch import by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1785
+* Tests: Extends coverage on Serving extrinsics methods by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1783
+* Fix: CVE-2024-24762 FastAPI by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1800
+* Fix: CVE-2024-26130 | vulnerability cryptography by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1801
+* fix PR templates by @mjurbanski-reef in https://github.com/opentensor/bittensor/pull/1778
+* Fix: SNYK-PYTHON-CERTIFI-5805047 | Vulnerability Certifi by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1816
+* Tests: Extends test coverage on Registration methods by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1814
+* Fix: Wallet overwrite functionality by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1802
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.11.0...v6.12.0
+
+## 6.11.0 / 2024-04-11
+
+## What's Changed
+* Tests: Adds coverage to subtensor help method & determine_chain_endpoint_and_network by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1761
+* [bug fix] Fix import json by @camfairchild in https://github.com/opentensor/bittensor/pull/1759
+* Remove context management for substrate in subtensor by @sepehr-opentensor in https://github.com/opentensor/bittensor/pull/1766
+* Tests: Extends coverage on axon methods by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1769
+* Revert nonce implementation fix by @ifrit98 in https://github.com/opentensor/bittensor/pull/1774
+* remove tests from package distribution by @mjurbanski-reef in https://github.com/opentensor/bittensor/pull/1779
+* Tests: Extends test coverage on Senate methods by @ibraheem-opentensor in https://github.com/opentensor/bittensor/pull/1781
+
+## New Contributors
+* @mjurbanski-reef made their first contribution in https://github.com/opentensor/bittensor/pull/1779
+* @ibraheem-opentensor made their first contribution in https://github.com/opentensor/bittensor/pull/1781
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.10.1...v6.11.0
+## 6.10.1 / 2024-04-05
+## What's Changed
+* Revert nonce implementation fix #1774: Breaking change needs to telegraphed in next release.
+
+## 6.10.0 / 2024-03-25
+
+## What's Changed
+* handle req args by parsing and raising by @ifrit98 in https://github.com/opentensor/bittensor/pull/1733
+* Replace wildcard imports with specific imports by @brueningf in https://github.com/opentensor/bittensor/pull/1724
+* Logging Refactor by @sepehr-opentensor in https://github.com/opentensor/bittensor/pull/1751
+* Update DEBUGGING.md by @e-gons in https://github.com/opentensor/bittensor/pull/1755
+* fix: nonce implementation by @GentikSolm in https://github.com/opentensor/bittensor/pull/1754
+
+## New Contributors
+* @sepehr-opentensor made their first contribution in https://github.com/opentensor/bittensor/pull/1751
+* @e-gons made their first contribution in https://github.com/opentensor/bittensor/pull/1755
+* @GentikSolm made their first contribution in https://github.com/opentensor/bittensor/pull/1754
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.9.3...v6.10.0
+
+
+
+## 6.9.3 / 2024-03-12
+
+## What's Changed
+* Release/6.9.2 by @ifrit98 in https://github.com/opentensor/bittensor/pull/1743
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.9.2...v6.9.3
+
+
+## 6.9.2 / 2024-03-08
+
+## What's Changed
+* Change error into a warning if not using archive. Impossible to tell if local is lite or full node.
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.9.1...v6.9.2
+
+
+## 6.9.1 / 2024-03-08
+
+## What's Changed
+* Hotfix for reversing comparison operator for block checking to raise error if not using archive nodes
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.9.0...v6.9.1
+
+
+## 6.9.0 / 2024-03-07
+
+## What's Changed
+* Doc: Updates WalletBalanceCommand docstring by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1716
+* feature: metapgraph.py now passing type check by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1721
+* fix: Updates `btcli wallet balance --all` to get proper Wallet Name & Coldkey Address sets by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1720
+* Feature/prompt set identity on btcli/phil by @ifrit98 in https://github.com/opentensor/bittensor/pull/1719
+* Fix: Raises error when exceeding block max on metagraph by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1722
+* Release/6.8.2 by @ifrit98 in https://github.com/opentensor/bittensor/pull/1730
+* Expands type checking to subtensor by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1731
+* Feature: Synapse passing type check by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1725
+* bump req for security vulnerability in crpytography by @ifrit98 in https://github.com/opentensor/bittensor/pull/1718
+* Fix: proper association with wallet dir and coldkey addr #1739 by @gus-opentensor & @sepehr-opentensor 
+* Fixed event lookup on new network added #1741 by @shibshib 
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.8.2...v6.9.0
+
+
+## 6.8.2 / 2024-03-01
+
+## What's Changed
+* Set weights fix retry and check mechanism by @ifrit98 in https://github.com/opentensor/bittensor/pull/1729
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.8.1...v6.8.2
+
+
+## 6.8.1 / 2024-02-22
+
+## What's Changed
+* Hotfix revert dendrite streaming call to use `synapse.process_streaming_response` func instead of Starlette `iter_any()` from response object.
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.8.0...v6.8.1
+
+
+## 6.8.0 / 2024-02-16
+
+## What's Changed
+* Release/6.7.2 by @ifrit98 in https://github.com/opentensor/bittensor/pull/1695
+* close synchronosuly on __del__ by @ifrit98 in https://github.com/opentensor/bittensor/pull/1700
+* CI: Flake8 by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1701
+* logging off switch by @ifrit98 in https://github.com/opentensor/bittensor/pull/1704
+* Extrinsic update by @ifrit98 in https://github.com/opentensor/bittensor/pull/1703
+* Bittensor shared request layer by @ifrit98 in https://github.com/opentensor/bittensor/pull/1698
+* Add no_prompt argument to help printout in https://github.com/opentensor/bittensor/pull/1707 
+* Adds mypi typechecking to circleci by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1705 
+* Remove set weights ttl now that we have a better extrinsic method by @ifrit98
+* Bug fix in overview command for dereg stake with outdated `stake_info` object fields by @ifrit98 in https://github.com/opentensor/bittensor/pull/1712 
+* Moves mock wallet creation to temp dir by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1711 
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.7.2...v6.8.0
+
+
+## 6.7.2 / 2024-02-08
+
+## What's Changed
+* Release/6.7.1 by @ifrit98 in https://github.com/opentensor/bittensor/pull/1688
+* Increases test coverage for cli & chain_data by @gus-opentensor in https://github.com/opentensor/bittensor/pull/1690
+* Subtensor/update pysubstrate latest/phil by @ifrit98 in https://github.com/opentensor/bittensor/pull/1684
+* Update staging to latest master by @ifrit98 in https://github.com/opentensor/bittensor/pull/1691
+* return messages with subtensor extrinsic to set weights by @ifrit98 in https://github.com/opentensor/bittensor/pull/1692
+* Logging/debug to trace axon by @ifrit98 in https://github.com/opentensor/bittensor/pull/1694
+
+
+**Full Changelog**: https://github.com/opentensor/bittensor/compare/v6.7.1...v6.7.2
+
+
 ## 6.7.1 / 2024-02-02
 
 ## What's Changed

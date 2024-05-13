@@ -20,6 +20,10 @@ import pytest
 import torch
 import bittensor
 
+from bittensor.metagraph import metagraph as Metagraph
+from unittest.mock import MagicMock
+from loguru import logger
+
 
 @pytest.fixture
 def mock_environment():
@@ -119,3 +123,54 @@ def test_process_weights_or_bonds(mock_environment):
     )  # Number of columns should be equal to number of neurons
 
     # TODO: Add more checks to ensure the bonds have been processed correctly
+
+
+# Mocking the bittensor.subtensor class for testing purposes
+@pytest.fixture
+def mock_subtensor():
+    subtensor = MagicMock()
+    subtensor.chain_endpoint = bittensor.__finney_entrypoint__
+    subtensor.network = "finney"
+    subtensor.get_current_block.return_value = 601
+    return subtensor
+
+
+# Mocking the metagraph instance for testing purposes
+@pytest.fixture
+def metagraph_instance():
+    metagraph = Metagraph(netuid=1337, sync=False)
+    metagraph._assign_neurons = MagicMock()
+    metagraph._set_metagraph_attributes = MagicMock()
+    metagraph._set_weights_and_bonds = MagicMock()
+    return metagraph
+
+
+@pytest.fixture
+def loguru_sink():
+    class LogSink:
+        def __init__(self):
+            self.messages = []
+
+        def write(self, message):
+            # Assuming `message` is an object, you might need to adjust how you extract the text
+            self.messages.append(str(message))
+
+        def __contains__(self, item):
+            return any(item in message for message in self.messages)
+
+    return LogSink()
+
+
+@pytest.mark.parametrize(
+    "block, test_id",
+    [
+        (300, "warning_case_block_greater_than_300"),
+    ],
+)
+def test_sync_warning_cases(block, test_id, metagraph_instance, mock_subtensor, caplog):
+    metagraph_instance.sync(block=block, lite=True, subtensor=mock_subtensor)
+
+    expected_message = "Attempting to sync longer than 300 blocks ago on a non-archive node. Please use the 'archive' network for subtensor and retry."
+    assert (
+        expected_message in caplog.text
+    ), f"Test ID: {test_id} - Expected warning message not found in Loguru sink."

@@ -17,11 +17,10 @@
 
 import argparse
 import bittensor
-from rich.prompt import Prompt
 from rich.table import Table
 from .utils import check_netuid_set
 
-console = bittensor.__console__
+console = bittensor.__console__  # type: ignore
 
 
 class MetagraphCommand:
@@ -260,6 +259,13 @@ class MetagraphCommand:
             dest="netuid",
             type=int,
             help="""Set the netuid to get the metagraph of""",
+            default=False,
+        )
+        metagraph_parser.add_argument(
+            "--no_prompt",
+            dest="no_prompt",
+            action="store_true",
+            help="""Set true to avoid prompting the user.""",
             default=False,
         )
 
