@@ -17,126 +17,22 @@
 # DEALINGS IN THE SOFTWARE.
 
 
-from openai.types.chat import ChatCompletionMessageParam
-from pydantic import BaseModel, Field
-from typing import List, Optional
+from enum import Enum
+from pydantic import BaseModel
+from typing import Any, List, Optional
+
+
+class InferenceStats(BaseModel):
+    time_to_first_token: float
+    time_for_all_tokens: float
+    total_time: float
+    tps: float
+    tokens: List[Any]
+    verified: bool
+    error: Optional[str] = None
 
 
 
-class InferenceSamplingParams(BaseModel):
-    """
-    SamplingParams is a pydantic model that represents the sampling parameters for the OpenAI Compabtable API model.
-    """
-
-    seed: int = Field(
-        title="Seed",
-        description="The seed used to generate the output.",
-    )
-
-    best_of: Optional[int] = Field(
-        default=1,
-        title="Best of",
-        description="The number of samples to generate.",
-    )
-
-    decoder_input_details: Optional[bool] = Field(
-        default=True,
-        title="Decoder Input Details",
-        description="Whether to return the decoder input details.",
-    )
-
-    details: Optional[bool] = Field(
-        default=False,
-        title="Details",
-        description="Whether to return the details.",
-    )
-
-    do_sample: Optional[bool] = Field(
-        default=True,
-        title="Do Sample",
-        description="Whether to sample.",
-    )
-
-    max_new_tokens: Optional[int] = Field(
-        default=32,
-        title="Max New Tokens",
-        description="The maximum number of tokens to generate in the completion.",
-    )
-
-    repetition_penalty: Optional[float] = Field(
-        default=1.0,
-        title="Repetition Penalty",
-        description="The repetition penalty.",
-    )
-
-    return_full_text: Optional[bool] = Field(
-        default=False,
-        title="Return Full Text",
-        description="Whether to return the full text.",
-    )
-
-    stop: Optional[List[str]] = Field(
-        default=[""],
-        title="Stop",
-        description="The stop words.",
-    )
-
-    temperature: Optional[float] = Field(
-        default=0.01,
-        title="Temperature",
-        description="Sampling temperature to use, between 0 and 2.",
-    )
-
-    top_k: Optional[int] = Field(
-        default=10,
-        title="Top K",
-        description="Nucleus sampling parameter, top_p probability mass.",
-    )
-
-    top_n_tokens: Optional[int] = Field(
-        default=5,
-        title="Top N Tokens",
-        description="The number of tokens to return.",
-    )
-
-    top_p: Optional[float] = Field(
-        default=0.998,
-        title="Top P",
-        description="Nucleus sampling parameter, top_p probability mass.",
-    )
-
-    truncate: Optional[int] = Field(
-        default=None,
-        title="Truncate",
-        description="The truncation length.",
-    )
-
-    typical_p: Optional[float] = Field(
-        default=0.9999999,
-        title="Typical P",
-        description="The typical probability.",
-    )
-
-    watermark: Optional[bool] = Field(
-        default=False,
-        title="Watermark",
-        description="Whether to watermark.",
-    )
-
-    stream: Optional[bool] = Field(
-        default=False,
-        title="Stream",
-        description="Whether to stream.",
-    )
-
-
-class Inference(BaseModel):
-    messages: List[ChatCompletionMessageParam] = Field(
-        title="Message",
-        description="The messages to be sent to the Bittensor network.",
-    )
-    sampling_params: Optional[InferenceSamplingParams] = Field(
-        default=InferenceSamplingParams(seed=333),
-        title="Sampling Params",
-        description="The sampling parameters for the OpenAI Compatible model.",
-    )
+class Endpoints(Enum):
+    CHAT = 'CHAT',
+    COMPLETION = 'COMPLETION'
